@@ -8,6 +8,8 @@ Imports & definition
   import { IdentityModel } from '../../models/identity.model';
   import { ApiResponseModel } from "../../models/api.reponse.model";
   import { AuthService } from "../../services/auth/auth-service.service";
+  import { Router } from '@angular/router';
+  import { Location } from '@angular/common';
 
   // Definition
   @Component({
@@ -40,8 +42,21 @@ Export
 
       // Module injection
       constructor(
-        private AuthService: AuthService
-      ) {};
+        private AuthService: AuthService,
+        private router: Router,
+        private location: Location  
+      ) {
+
+        this.AuthService.getUserId()
+          .then( (apiResponse: ApiResponseModel) =>  {
+            this.location.replaceState('/me'); // clears browser history so they can't navigate with back button
+            this.router.navigate(['me'])
+          })
+          .catch( (apiResponse: ApiResponseModel) =>  {
+            
+          })
+
+      };
     //
 
 
@@ -59,7 +74,7 @@ Export
           this.displayReturnRegister = true;
 
           // Reset form data
-          this.resetFormDataRegister = true;
+          this.resetFormDataRegister = true;          
         })
         .catch( (apiResponse: ApiResponseModel) => {
           console.log(apiResponse)
@@ -82,6 +97,8 @@ Export
 
           // Reset form data
           this.resetFormDataLogin = true;
+
+          this.router.navigate(['me'])
         })
         .catch( (apiResponse: ApiResponseModel) => {
           console.log(apiResponse)

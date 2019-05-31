@@ -10,7 +10,7 @@ Imports
     const Vocabulary = require('../../services/vocabulary.service');
     const { sendBodyError, sendFieldsError, sendApiSuccessResponse, sendApiErrorResponse } = require('../../services/response.service');
     const { checkFields } = require('../../services/request.service');
-    const { register, confirmIdentity, login, setPassword } = require('./auth.controller');
+    const { register, confirmIdentity, login, logout, setPassword } = require('./auth.controller');
 //
 
 /*
@@ -88,6 +88,17 @@ Routes definition
                     .catch( apiResponse => sendApiErrorResponse(res, Vocabulary.request.error, apiResponse) );
                 };
             });
+
+            /**
+             * POST Route to logout user
+             * @param body: Object => email: String, password: String
+             * @callback => send user _id and date informations
+            */
+            authRouter.post( '/logout', this.passport.authenticate('jwt', { session: false }), (req, res) => {
+                logout(req.body, res)
+                    .then( apiResponse => sendApiSuccessResponse(res, Vocabulary.request.success, apiResponse) )
+                    .catch( apiResponse => sendApiErrorResponse(res, Vocabulary.request.error, apiResponse) );
+        });
 
             /**
              * GET Route to check identity token (for Angular AuthGuard)

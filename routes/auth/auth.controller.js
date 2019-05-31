@@ -124,6 +124,18 @@ Methods
     };
 
     /**
+     * Logout user
+     * @param body: Object => email: String, password: String
+    */
+   const logout = (body, res) => {
+    return new Promise( (resolve, reject) => {
+         // Set cookie
+         res.cookie(process.env.COOKIE_NAME, '', { httpOnly: true });
+         resolve()
+    });
+};
+
+    /**
      * Set user password
      * @param body: Object => password: String, newPassword: String
     */
@@ -172,6 +184,7 @@ Export
         register,
         confirmIdentity,
         login,
+        logout,
         setPassword
     }
 //

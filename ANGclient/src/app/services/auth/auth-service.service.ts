@@ -6,6 +6,7 @@ Imports
   // import 'rxjs/add/operator/toPromise';
   import { environment } from "../../../environments/environment";
   import { IdentityModel } from '../../models/identity.model';
+  import { Router } from '@angular/router';
 //
 
 
@@ -16,7 +17,10 @@ Definition
   export class AuthService {
 
     // Inject module(s) in the service
-    constructor( private HttpClient: HttpClient ){};
+    constructor( 
+      private HttpClient: HttpClient, 
+      private router: Router
+    ){};
     
     // Function to register a user
     public register(userData: IdentityModel): Promise<any>{
@@ -54,6 +58,19 @@ Definition
       return this.HttpClient.post(`${environment.apiUrl}/auth/login`, userData, { headers: myHeader })
       .toPromise().then(this.getData).catch(this.handleError);
     };
+
+    // Function to disconnect a user
+    public logout(): Promise<any> {
+      // Set header
+      let myHeader = new HttpHeaders();
+      myHeader.append('Content-Type', 'application/json');
+
+      // POST '/auth/login'
+      return this.HttpClient.post(`${environment.apiUrl}/auth/logout`, {}, { headers: myHeader })
+      .toPromise().then((data) => {
+        this.router.navigate(['/'])
+      }).catch(this.handleError);
+    }
 
     // Function to reset password
     public restPassword(password: String, newPassword: String): Promise<any>{

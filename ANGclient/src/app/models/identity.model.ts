@@ -4,5 +4,7 @@ export interface IdentityModel {
     password?: String,
     securePassword?: String,
     creationDate?: String,
-    lastConnection?: String
+    lastConnection?: String;
+    firstname?: String,
+    lastname?: String
 }

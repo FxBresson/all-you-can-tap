@@ -1,6 +1,6 @@
 <ul>
   <li *ngFor="let game of gameCollection">
     <span>{{game.score}}</span>
-    <span>{{game.user.email}} / {{game.date}}</span>
+    <span>{{game.user.firstname}}&nbsp;{{game.user.lastname}} / {{game.date}}</span>
   </li>
 </ul>

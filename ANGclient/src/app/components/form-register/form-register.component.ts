@@ -46,6 +46,8 @@ Imports & definition
         // Set validator
         this.form = this.FormBuilder.group({
           email: [undefined, Validators.required],
+          firstname: [undefined, Validators.required],
+          lastname: [undefined, Validators.required],
           password: [undefined, Validators.required],
           securePassword: [undefined, Validators.required]
         });
@@ -53,6 +55,8 @@ Imports & definition
         // Set form data obbject
         this.formData = {
           email: undefined,
+          firstname: undefined,
+          lastname: undefined,
           password: undefined,
           securePassword: undefined
         };
@@ -66,6 +70,8 @@ Imports & definition
           // Set login data
           this.formData = {
             email: this.form.value.email,
+            firstname: this.form.value.firstname,
+            lastname: this.form.value.lastname,
             password: this.form.value.password,
           }
 

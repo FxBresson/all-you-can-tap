@@ -18,7 +18,9 @@ Declare each property and type needed for the schema
         password: String,
         isValidated: Boolean,
         creationDate: String,
-        lastConnection: String
+        lastConnection: String,
+        firstname: String,
+        lastname: String
     })
 //
 
@@ -30,8 +32,6 @@ Generate a user access token
         // The access token expired in 60 days
         const expiry = new Date();
         expiry.setDate(expiry.getDate() + 59);
-
-
 
         /**
          * JWT sign() method

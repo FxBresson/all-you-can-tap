@@ -1,0 +1,32 @@
+<section class="maxWidth">
+  <div *ngIf="!UserStore.user; else loggedIn">
+    <h1>Welcome on Tapboard</h1>
+    <h2>Login or register to start tapping</h2>
+  </div>
+</section>
+
+
+
+<ng-template #loggedIn>
+  <div *ngIf="router.url === '/me'">
+    <h1>Hello {{UserStore.user.firstname}}</h1>
+    <h2>You have 10s to tap. Ready ? Steady ? Tap !</h2>
+    <nav>
+      <ul>
+        <li><a [routerLink]="'/tap'">Scores</a></li>
+        <li><a (click)="logout()">Logout</a></li>
+      </ul>
+    </nav>
+  </div>
+  
+  <div *ngIf="router.url === '/tap'">
+    <h1>Score table</h1>
+    <h2>Here is the list of scores</h2>
+    <nav>
+      <ul>
+        <li><a [routerLink]="'/me'">Play</a></li>
+        <li><a (click)="logout()">Logout</a></li>
+      </ul>
+    </nav>
+  </div>
+</ng-template>

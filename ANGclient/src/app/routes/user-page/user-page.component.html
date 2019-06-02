@@ -1,0 +1,10 @@
+
+<!-- <div class="m-button" (click)="tap()" [style.background-image]="score % 2 ? 'url(assets/tapOn.png)' : 'url(assets/tapOff.png)'"></div> -->
+<div class="m-button" (click)="tap()">
+  <img *ngIf="!!(score % 2)" src="assets/tapOn.png" />
+  <img *ngIf="!(score % 2)" src="assets/tapOff.png" />
+</div>
+
+<div class="m-progress-bar">
+  <div class="m-progress-bar__value" [style.width.%]="progress"></div>
+</div>

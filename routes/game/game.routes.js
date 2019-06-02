@@ -11,6 +11,7 @@ Imports
   const { sendBodyError, sendFieldsError, sendApiSuccessResponse, sendApiErrorResponse } = require('../../services/response.service');
   const { checkFields } = require('../../services/request.service');
   const { postGame } = require('./game.controller');
+  const GameModel = require('../../models/game.model');
 //
 
 /*
@@ -45,17 +46,22 @@ Routes definition
           postGame(req.body)
             .then( apiResponse => sendApiSuccessResponse(res, Vocabulary.request.success, apiResponse) )
             .catch( apiResponse => sendApiErrorResponse(res, Vocabulary.request.error, apiResponse))
-        };
-      });
+          };
+        });
         
-
-      /**
-       * GET Route to check identity token (for Angular AuthGuard)
-       * @param passport: AuthStrategy => use the access token to check user identity
-       * @callback => send user _id and date informations
-      */
-      gameRouter.get( '/', this.passport.authenticate('jwt', { session: false }), (req, res) => {
-        return sendApiSuccessResponse(res, Vocabulary.request.success, { })
+        
+        /**
+         * GET Route to check identity token (for Angular AuthGuard)
+         * @param passport: AuthStrategy => use the access token to check user identity
+         * @callback => send user _id and date informations
+         */
+        gameRouter.get( '/', this.passport.authenticate('jwt', { session: false }), (req, res) => {
+          GameModel.find()
+            .populate('user')
+            .exec((err, games) => {
+              if(err) { return sendApiErrorResponse(res, Vocabulary.request.error, err)}
+              return sendApiSuccessResponse(res, Vocabulary.request.success, games)
+            })
       });
 
         

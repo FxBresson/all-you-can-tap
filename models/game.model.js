@@ -12,7 +12,10 @@ Declare each property and type needed for the schema
 */
   const gameSchema = new Schema({
     score: Number,
-    user: String,
+    user: { 
+      type: Schema.Types.ObjectId,
+      ref: 'identity' 
+    },
     date: {
       type: Date,
       default: new Date()

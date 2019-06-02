@@ -9,6 +9,7 @@ Imports & definition
   import { ApiResponseModel } from "../../models/api.reponse.model";
   import { AuthService } from "../../services/auth/auth-service.service";
   import { Router } from '@angular/router';
+import { RequesterService } from 'src/app/services/requester/requester.service';
 
   // Definition
   @Component({
@@ -24,9 +25,8 @@ Imports & definition
 Export
 */
   export class ScorePageComponent implements OnInit {
-
     
-
+    public gameCollection: [] = [];
 
     /* 
     Config.
@@ -34,10 +34,10 @@ Export
       // Module injection
       constructor(
         private AuthService: AuthService,
-        private router: Router
+        private router: Router,
+        private requester: RequesterService
       ) {};
     //
-
 
     /*
     Methods
@@ -51,6 +51,9 @@ Export
     */
       ngOnInit() { 
         this.AuthService.getUserId().then( console.log )
+        this.requester.get('/game').then(apiResponse => {
+          this.gameCollection = apiResponse.data
+        })
       };
     //
   }

@@ -1,3 +1,6 @@
-<p>
-  Score page works !
-</p>
+<ul>
+  <li *ngFor="let game of gameCollection">
+    <span>{{game.score}}</span>
+    <span>{{game.user.email}} / {{game.date}}</span>
+  </li>
+</ul>

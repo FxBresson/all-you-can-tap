@@ -1,10 +1,11 @@
 {
-  "name": "mean-boilerplate",
-  "version": "1.0.0",
-  "description": "Boilerplate code to start a MEAN stack project",
+  "name": "all-you-can-tap",
+  "version": "0.1.0",
+  "description": "Simple clicker game",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "build": "cd ANGclient && ng build --output-path ../www",
+    "start": "cd ANGclient && ng build --output-path ../www  && cd ../ && node server.js",
     "dev": "concurrently -n server,app \"nodemon server.js\" \"cd ANGclient && ng build --output-path ../www --watch\""
   },
   "keywords": [

@@ -8,7 +8,8 @@ Imports
   import { HttpClientModule } from '@angular/common/http';
   
   // Inner components
-  import {  AuthService} from "./services/auth/auth-service.service";
+  import { AuthService} from "./services/auth/auth-service.service";
+  import { RequesterService } from './services/requester/requester.service';
   import { AppComponent } from './app.component';
   import { MainRouter } from './app.router';
 
@@ -30,7 +31,7 @@ Definition
       HttpClientModule,
       HeaderModule
     ],
-    providers: [ AuthService ],
+    providers: [ AuthService, RequesterService ],
     bootstrap: [ AppComponent ]
   })
 //

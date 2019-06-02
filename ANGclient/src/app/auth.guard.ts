@@ -9,6 +9,7 @@ https://gist.github.com/DWS-paris/65df1566222cd9819e3050e96af6f0c6
   // Inner
   import { ApiResponseModel } from "./models/api.reponse.model";
   import { AuthService } from "./services/auth/auth-service.service";
+import { UserStoreService } from './services/stores/user.store.service';
 
   // Definition
   @Injectable({
@@ -27,6 +28,7 @@ Export
       constructor( 
         private AuthService: AuthService,
         private Router: Router,
+        private UserStore: UserStoreService
       ){}
     //
 
@@ -40,7 +42,10 @@ Export
         return new Promise( (resolve, reject) => {
           // Use Auth service to check user indentity from the servere
           this.AuthService.getUserId()
-          .then( (apiResponse: ApiResponseModel) =>  resolve(true))
+          .then( (apiResponse: ApiResponseModel) =>  {
+            this.UserStore.login(apiResponse.data)
+            resolve(true)
+          })
           .catch( (apiResponse: ApiResponseModel) =>  this.Router.navigateByUrl('/'))
         })
       }

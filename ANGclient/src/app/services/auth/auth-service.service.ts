@@ -7,6 +7,7 @@ Imports
   import { environment } from "../../../environments/environment";
   import { IdentityModel } from '../../models/identity.model';
   import { Router } from '@angular/router';
+  import { UserStoreService } from '../stores/user.store.service';
 //
 
 
@@ -19,7 +20,8 @@ Definition
     // Inject module(s) in the service
     constructor( 
       private HttpClient: HttpClient, 
-      private router: Router
+      private router: Router,
+      private UserStore: UserStoreService
     ){};
     
     // Function to register a user
@@ -68,6 +70,7 @@ Definition
       // POST '/auth/login'
       return this.HttpClient.post(`${environment.apiUrl}/auth/logout`, {}, { headers: myHeader })
       .toPromise().then((data) => {
+        this.UserStore.logout()
         this.router.navigate(['/'])
       }).catch(this.handleError);
     }

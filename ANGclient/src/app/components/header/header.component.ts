@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth-service.service';
 import { Router } from '@angular/router';
+import { UserStoreService } from 'src/app/services/stores/user.store.service';
 
 @Component({
   selector: 'app-header',
@@ -10,17 +11,14 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  public user: {} = null;
-
   constructor(
     private AuthService: AuthService,
-    public router: Router
+    public router: Router,
+    public UserStore: UserStoreService
   ) { }
 
   ngOnInit() {
-    this.AuthService.getUserId().then((apiResponse) => {
-      this.user = apiResponse.data;
-    }).catch(console.log)
+   
   }
 
   logout() {

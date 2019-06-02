@@ -10,6 +10,7 @@ Imports & definition
   import { AuthService } from "../../services/auth/auth-service.service";
   import { Router } from '@angular/router';
   import { Location } from '@angular/common';
+import { UserStoreService } from 'src/app/services/stores/user.store.service';
 
   // Definition
   @Component({
@@ -44,11 +45,13 @@ Export
       constructor(
         private AuthService: AuthService,
         private router: Router,
-        private location: Location  
+        private location: Location  ,
+        private UserStore: UserStoreService
       ) {
 
         this.AuthService.getUserId()
           .then( (apiResponse: ApiResponseModel) =>  {
+            this.UserStore.login(apiResponse.data)
             this.location.replaceState('/me'); // clears browser history so they can't navigate with back button
             this.router.navigate(['me'])
           })
@@ -98,6 +101,7 @@ Export
           // Reset form data
           this.resetFormDataLogin = true;
 
+          this.UserStore.login(apiResponse.data)
           this.router.navigate(['me'])
         })
         .catch( (apiResponse: ApiResponseModel) => {

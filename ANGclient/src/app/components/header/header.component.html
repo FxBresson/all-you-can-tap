@@ -1,5 +1,5 @@
 <section class="maxWidth">
-  <div *ngIf="!user; else loggedIn">
+  <div *ngIf="!UserStore.user; else loggedIn">
     <h1>Welcome on Tapboard</h1>
     <h2>Login or register to start tapping</h2>
   </div>
@@ -9,7 +9,7 @@
 
 <ng-template #loggedIn>
   <div *ngIf="router.url === '/me'">
-    <h1>Hello {{user.firstname}}</h1>
+    <h1>Hello {{UserStore.user.firstname}}</h1>
     <h2>You have 10s to tap. Ready ? Steady ? Tap !</h2>
     <nav>
       <ul>

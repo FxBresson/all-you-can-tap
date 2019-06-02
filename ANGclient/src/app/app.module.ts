@@ -12,6 +12,7 @@ Imports
   import { RequesterService } from './services/requester/requester.service';
   import { AppComponent } from './app.component';
   import { MainRouter } from './app.router';
+  import { UserStoreService } from './services/stores/user.store.service';
 
   // Inner modules
   import { HeaderModule } from "./components/header/module";
@@ -31,7 +32,7 @@ Definition
       HttpClientModule,
       HeaderModule
     ],
-    providers: [ AuthService, RequesterService ],
+    providers: [ AuthService, RequesterService, UserStoreService ],
     bootstrap: [ AppComponent ]
   })
 //

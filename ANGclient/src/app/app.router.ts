@@ -30,6 +30,11 @@ Export
             path: 'me',
             loadChildren: './routes/user-page/module#Module',
             canActivate: [ AuthGuard ] // Accessible for connected user
+        },
+        {
+            path: 'tap',
+            loadChildren: './routes/score-page/module#Module',
+            canActivate: [ AuthGuard ] // Accessible for connected user
         }
     ];
 //

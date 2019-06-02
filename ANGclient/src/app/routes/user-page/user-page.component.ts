@@ -83,7 +83,6 @@ Export
     Hooks
     */
       ngOnInit() { 
-        this.AuthService.getUserId().then( console.log )
       };
     //
   }

@@ -50,7 +50,6 @@ Export
     Hooks
     */
       ngOnInit() { 
-        this.AuthService.getUserId().then( console.log )
         this.requester.get('/game').then(apiResponse => {
           this.gameCollection = apiResponse.data
         })

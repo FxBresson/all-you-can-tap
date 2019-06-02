@@ -6,6 +6,7 @@ Definition
         idValidation: ['_id', 'password'],
         login: ['email', 'password'],
         changePassword: ['password', 'newPassword'],
+        postScore: ['score']
     };
 //
 

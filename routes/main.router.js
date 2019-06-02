@@ -12,6 +12,7 @@ Imports
     // Routers
     const AuthRouterClass = require('./auth/auth.routes');
     const FrontRouterClass = require('./front/front.routes');
+    const GameRouterClass = require('./game/game.routes')
 //
 
 /*
@@ -26,8 +27,7 @@ Define routers
     // Child
     const authRouter = new AuthRouterClass({ passport });
     const frontRouter = new FrontRouterClass({ passport });
-    
-    
+    const gameRouter = new GameRouterClass({ passport })
 //
 
 /*
@@ -35,6 +35,7 @@ Configure routes
 */
     // Set API routers
     apiRouter.use('/auth', authRouter.init());
+    apiRouter.use('/game', gameRouter.init());
 
     // Set front router
     mainRouter.use('/', frontRouter.init());
